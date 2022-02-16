@@ -11,7 +11,18 @@ class BountyViewController: UIViewController, UITableViewDataSource, UITableView
     let nameList = ["brook", "chopper", "franky", "luffy", "nami", "robin", "sanji", "zoro"]
     let bountyList = [33000000, 50, 44000000, 300000000, 1600000, 80000000, 77000000, 120000000]
     
-
+    //tableView 에서 세그웨이가 실행되기 전에 실행되는 메소드
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //detailViewController에게 데이터 넘겨줌
+        if segue.identifier == "showDetail" {
+            let vc = segue.destination as? DetailViewController
+            
+            if let index = sender as? Int{
+                vc?.name = nameList[index]
+                vc?.bounty = bountyList[index]
+            }
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,9 +52,10 @@ class BountyViewController: UIViewController, UITableViewDataSource, UITableView
 //            return UITableViewCell()
 //        } ---? guard 랑 같은 의미
     }
-    //UITableViewDelegate
+    //UITableViewDelegate 상호작용
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("---> \(indexPath.row)")
+        performSegue(withIdentifier: "showDetail", sender: indexPath.row)
     }
 
    
