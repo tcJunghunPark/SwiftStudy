@@ -14,6 +14,7 @@
 		A70CF2A027BC9EB50047C732 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A70CF29E27BC9EB50047C732 /* LaunchScreen.storyboard */; };
 		A70CF2AC27BCC1860047C732 /* BountyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70CF2AB27BCC1860047C732 /* BountyViewController.swift */; };
 		A70CF2AE27BCD8050047C732 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70CF2AD27BCD8050047C732 /* DetailViewController.swift */; };
+		A70CF2B027BDE58B0047C732 /* BountyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70CF2AF27BDE58B0047C732 /* BountyInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		A70CF2A127BC9EB50047C732 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A70CF2AB27BCC1860047C732 /* BountyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BountyViewController.swift; sourceTree = "<group>"; };
 		A70CF2AD27BCD8050047C732 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		A70CF2AF27BDE58B0047C732 /* BountyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BountyInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				A70CF29527BC9EB40047C732 /* SceneDelegate.swift */,
 				A70CF29927BC9EB40047C732 /* Main.storyboard */,
 				A70CF2AB27BCC1860047C732 /* BountyViewController.swift */,
+				A70CF2AF27BDE58B0047C732 /* BountyInfo.swift */,
 				A70CF2AD27BCD8050047C732 /* DetailViewController.swift */,
 				A70CF29C27BC9EB50047C732 /* Assets.xcassets */,
 				A70CF29E27BC9EB50047C732 /* LaunchScreen.storyboard */,
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A70CF2B027BDE58B0047C732 /* BountyInfo.swift in Sources */,
 				A70CF29427BC9EB40047C732 /* AppDelegate.swift in Sources */,
 				A70CF2AC27BCC1860047C732 /* BountyViewController.swift in Sources */,
 				A70CF29627BC9EB40047C732 /* SceneDelegate.swift in Sources */,
