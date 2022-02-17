@@ -7,7 +7,10 @@
 
 import UIKit
 
-class BountyViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class BountyViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    
+    
     
     //MVVM 찾기
     
@@ -44,39 +47,46 @@ class BountyViewController: UIViewController, UITableViewDataSource, UITableView
         // Do any additional setup after loading the view.
     }
     
-    //UITableViewDataSource
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfBountyInfoList //셀 몇개?
+    //UICollectionViewDataSource 몇개? 셀은 어떻게 표현?
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.numberOfBountyInfoList
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //cell의 기본 타입은 UITableView인데 상속한 ListCell로 커스텀 하기 위해서 upper casting 필요, 캐스팅 할 때 옵셔널 이기 때문에 guard나 if 필요
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ListCell else {
-            return UITableViewCell()
-        }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell( withReuseIdentifier: "GridCell", for: indexPath) as?
+                GridCell else {
+                    return UICollectionViewCell()
+                }
         
-        let bountyInfo = viewModel.bountyInfo(at: indexPath.row)
+        let bountyInfo = viewModel.bountyInfo(at: indexPath.item)
         cell.update(info: bountyInfo)
         
         return cell
+    }
+    //UICollectionViewDelegate 셀이 클릭되었을때 어떻게?
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("---> \(indexPath.item)")
+        performSegue(withIdentifier: "showDetail", sender: indexPath.item)
+    }
+    
+    //UICollectionViewDelegateFlowLayout cell사이즈를 계산 (device마다 화면 비율 크기가 다르기 때문에 일관적인 디자인을 보여주기 위해)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-//        if let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ListCell {
-//            return cell
-//        }else {
-//            return UITableViewCell()
-//        } ---? guard 랑 같은 의미
+        let itemSpacing: CGFloat = 10
+        let textAreaHeight: CGFloat = 65
+        
+        let width: CGFloat = (collectionView.bounds.width - itemSpacing)/2
+        let height: CGFloat = width * 10/7 + textAreaHeight
+        
+        return CGSize(width: width, height: height)
     }
-    //UITableViewDelegate 상호작용
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("---> \(indexPath.row)")
-        performSegue(withIdentifier: "showDetail", sender: indexPath.row)
-    }
-
    
 
 }
 
-class ListCell: UITableViewCell {
+
+
+class GridCell: UICollectionViewCell {
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var bountLabel: UILabel!
