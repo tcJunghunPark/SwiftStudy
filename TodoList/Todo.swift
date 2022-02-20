@@ -17,13 +17,15 @@ struct Todo: Codable, Equatable {
     var isToday: Bool
     
     mutating func update(isDone: Bool, detail: String, isToday: Bool) {
-        // TODO: update 로직 추가
-        
+        // TODO: update 로직 추가 [x]
+        self.isDone = isDone
+        self.detail = detail
+        self.isToday = isToday
     }
     
     static func == (lhs: Self, rhs: Self) -> Bool {
-        // TODO: 동등 조건 추가
-        return true
+        // TODO: 동등 조건 추가 [x]
+        return lhs.id == rhs.id
     }
 }
 
@@ -36,21 +38,41 @@ class TodoManager {
     var todos: [Todo] = []
     
     func createTodo(detail: String, isToday: Bool) -> Todo {
-        //TODO: create로직 추가
-        return Todo(id: 1, isDone: false, detail: "2", isToday: true)
+        //TODO: create로직 추가 [x]
+        let nextId = TodoManager.lastId
+        TodoManager.lastId = nextId + 1
+        return Todo(id: nextId , isDone: false, detail: detail , isToday: isToday)
     }
     
     func addTodo(_ todo: Todo) {
         //TODO: add로직 추가
+        todos.append(todo)
+        saveTodo()
     }
     
     func deleteTodo(_ todo: Todo) {
         //TODO: delete 로직 추가
+//      SAMPLE 더 효율적
+//        if let index = todos.firstIndex(of: todo) {
+//            todos.remove(at: index)
+//        }
+//        closure 사용법
+        todos = todos.filter{ existingTodo-> Bool in
+            return existingTodo.id != todo.id
+        }
+//        closure 더 짧게
+//         todos = todos.filter{ $0.id = todo.id }
+        
+        saveTodo()
         
     }
     
     func updateTodo(_ todo: Todo) {
         //TODO: updatee 로직 추가
+        guard let index = todos.firstIndex(of: todo) else {return}
+        todos[index].update(isDone: todo.isDone, detail: todo.detail, isToday: todo.isToday)
+        
+        saveTodo()
         
     }
     
